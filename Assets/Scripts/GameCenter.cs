@@ -9,6 +9,9 @@ using UnityEditor;
 
 public class GameCenter : MonoBehaviour
 {
+    static GameCenter s_Instance; // 유일성이 보장된다
+    public static GameCenter Instance { get { Init(); return s_Instance; } } // 유일한 매니저를 갖고온다
+
     [SerializeField]
     Transform dogRoot;
     [SerializeField]
@@ -46,10 +49,25 @@ public class GameCenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 초기화
+        Init();
         if (!buttonRace)
             Debug.LogError("레이스 버튼이 연결되지 않음");
         LoadGuys(guyRoot.childCount);
         LoadDogs(dogRoot.childCount);
+    }
+
+    static void Init()
+    {
+        GameObject go = GameObject.Find("GameCenter");
+        if (go == null)
+        {
+            go = new GameObject { name = "GameCenter" };
+            go.AddComponent<GameCenter>();
+        }
+
+        DontDestroyOnLoad(go);
+        s_Instance = go.GetComponent<GameCenter>();
     }
 
     void LoadGuys(int count)

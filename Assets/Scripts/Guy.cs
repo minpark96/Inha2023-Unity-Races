@@ -22,6 +22,8 @@ public class Guy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameCenter go = GameCenter.Instance;
+
         if(!bet)
         {
             Debug.Log(name + "는 Bet이 없어서 하위 오브젝트에서 bet을 찾아 넣는다.");
