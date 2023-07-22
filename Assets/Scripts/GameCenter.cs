@@ -81,7 +81,7 @@ public class GameCenter : MonoBehaviour
             Debug.Log(guys[i].name + "ÀÐ¾ú´Ù");
         }
     }
-
+    
     void LoadDogs(int count)
     {
         dogs = new Dog[count];
